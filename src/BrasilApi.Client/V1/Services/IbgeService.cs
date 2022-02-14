@@ -8,24 +8,22 @@ using BrasilApi.Client.V1.Models.Ibge;
 
 namespace BrasilApi.Client.V1.Services
 {
-    public class IbgeService : IIbgeService
+    public class IbgeService : ServiceBase, IIbgeService
     {
         public readonly string StatesUri = "api/ibge/uf/v1";
         public readonly string MunicipalitiesUri = "api/ibge/municipios/v1";
         
-        private readonly BrasilApiConfiguration _configuration;
-
         public IbgeService(BrasilApiConfiguration configuration)
+            : base(configuration)
         {
-            _configuration = configuration ?? throw new ArgumentException(nameof(configuration));
         }
 
         public async Task<IEnumerable<Municipio>> GetMunicipalitiesAsync(string siglaUF)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync($"{this.MunicipalitiesUri}/{siglaUF}");
                 
@@ -40,8 +38,8 @@ namespace BrasilApi.Client.V1.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync($"{this.StatesUri}");
                 
@@ -57,8 +55,8 @@ namespace BrasilApi.Client.V1.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync($"{this.StatesUri}/{code}");
                 

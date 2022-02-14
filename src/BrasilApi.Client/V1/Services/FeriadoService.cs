@@ -8,23 +8,21 @@ using BrasilApi.Client.V1.Models;
 
 namespace BrasilApi.Client.V1.Services
 {
-    public class FeriadoService : IFeriadoService
+    public class FeriadoService : ServiceBase, IFeriadoService
     {
         public readonly string Uri = "api/feriados/v1";
         
-        private readonly BrasilApiConfiguration _configuration;
-
         public FeriadoService(BrasilApiConfiguration configuration)
+            : base(configuration)
         {
-            _configuration = configuration ?? throw new ArgumentException(nameof(configuration));
         }
 
         public async Task<IEnumerable<Feriado>> GetAsync(string ano)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync($"{this.Uri}/{ano}");
                 

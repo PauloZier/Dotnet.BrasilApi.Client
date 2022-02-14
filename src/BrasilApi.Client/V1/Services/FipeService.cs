@@ -8,25 +8,23 @@ using BrasilApi.Client.V1.Models.Fipe;
 
 namespace BrasilApi.Client.V1.Services
 {
-    public class FipeService : IFipeService
+    public class FipeService : ServiceBase, IFipeService
     {
         public readonly string BrandsUri = "api/fipe/marcas/v1";
         public readonly string PricesUri = "api/fipe/preco/v1";
         public readonly string TablesUri = "api/fipe/tabelas/v1";
-        
-        private readonly BrasilApiConfiguration _configuration;
-
+    
         public FipeService(BrasilApiConfiguration configuration)
+            : base(configuration)
         {
-            _configuration = configuration ?? throw new ArgumentException(nameof(configuration));
         }
 
         public async Task<IEnumerable<Marca>> GetBrandsAsync(TipoVeiculo? tipoVeiculo = null, long? tabelaReferencia = null)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var uri = tipoVeiculo != null 
                     ? $"{this.BrandsUri}/{tipoVeiculo.ToString().ToLower()}" 
@@ -48,8 +46,8 @@ namespace BrasilApi.Client.V1.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var uri = $"{this.PricesUri}/{codigoFipe}";
                 
@@ -69,8 +67,8 @@ namespace BrasilApi.Client.V1.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync($"{this.TablesUri}");
                 

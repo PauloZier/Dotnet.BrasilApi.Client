@@ -8,23 +8,21 @@ using System.Net.Http.Json;
 
 namespace BrasilApi.Client.V1.Services
 {
-    public class BankService : IBankService
+    public class BankService : ServiceBase, IBankService
     {
         public readonly string Uri = "api/banks/v1";
         
-        private readonly BrasilApiConfiguration _configuration;
-
-        public BankService(BrasilApiConfiguration configuration)
+        public BankService(BrasilApiConfiguration configuration) 
+            : base(configuration)
         {
-            _configuration = configuration ?? throw new ArgumentException(nameof(configuration));
         }
 
         public async Task<IEnumerable<Bank>> GetAsync()
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
 
                 var response = await client.GetAsync(this.Uri);
                 
@@ -39,8 +37,8 @@ namespace BrasilApi.Client.V1.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(_configuration.Endpoint);
-                client.Timeout = _configuration.TimeOut;
+                client.BaseAddress = new Uri(this.Configuration.Endpoint);
+                client.Timeout = this.Configuration.TimeOut;
                 
                 var response = await client.GetAsync($"{this.Uri}/{code}");
                 

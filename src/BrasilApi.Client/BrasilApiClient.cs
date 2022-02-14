@@ -4,27 +4,24 @@ using BrasilApi.Client.V1.Services;
 
 namespace BrasilApi.Client
 {
-    public class BrasilApiClient : IBrasilApiClient
+    public class BrasilApiClient : ServiceBase, IBrasilApiClient
     {
-        private readonly BrasilApiConfiguration _configuration;
         public Versao1 V1 { get; }
         public Versao2 V2 { get; }
 
         public BrasilApiClient(BrasilApiConfiguration configuration = null)
+            : base(configuration ?? new BrasilApiConfiguration())
         {
-            _configuration = configuration ?? new BrasilApiConfiguration();
-            V1 = new Versao1(_configuration);
-            V2 = new Versao2(_configuration);
+            V1 = new Versao1(this.Configuration);
+            V2 = new Versao2(this.Configuration);
         }
     }
 
-    public class Versao1
+    public class Versao1 : ServiceBase
     {
-        private readonly BrasilApiConfiguration _configuration;
-
-        public Versao1(BrasilApiConfiguration configuration = null)
+        public Versao1(BrasilApiConfiguration configuration)
+            : base(configuration)
         {
-            _configuration = configuration ?? new BrasilApiConfiguration();
         }
 
         private IBankService _bankService;
@@ -40,7 +37,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_bankService == null)
-                    _bankService = new BankService(_configuration);
+                    _bankService = new BankService(this.Configuration);
 
                 return _bankService;
             }
@@ -51,7 +48,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_cepService == null)
-                    _cepService = new CepService(_configuration);
+                    _cepService = new CepService(this.Configuration);
 
                 return _cepService;
             }
@@ -62,7 +59,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_dadosCnpjService == null)
-                    _dadosCnpjService = new DadosCnpjService(_configuration);
+                    _dadosCnpjService = new DadosCnpjService(this.Configuration);
 
                 return _dadosCnpjService;
             }
@@ -73,7 +70,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_dddService == null)
-                    _dddService = new DDDService(_configuration);
+                    _dddService = new DDDService(this.Configuration);
 
                 return _dddService;
             }
@@ -84,7 +81,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_feriadoService == null)
-                    _feriadoService = new FeriadoService(_configuration);
+                    _feriadoService = new FeriadoService(this.Configuration);
 
                 return _feriadoService;
             }
@@ -95,7 +92,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_fipeService == null)
-                    _fipeService = new FipeService(_configuration);
+                    _fipeService = new FipeService(this.Configuration);
 
                 return _fipeService;
             }
@@ -106,20 +103,18 @@ namespace BrasilApi.Client
             get
             {
                 if (_ibgeService == null)
-                    _ibgeService = new IbgeService(_configuration);
+                    _ibgeService = new IbgeService(this.Configuration);
 
                 return _ibgeService;
             }
         }
     }
 
-    public class Versao2
+    public class Versao2 : ServiceBase
     {
-        private readonly BrasilApiConfiguration _configuration;
-
-        public Versao2(BrasilApiConfiguration configuration = null)
+        public Versao2(BrasilApiConfiguration configuration)
+            : base(configuration)
         {
-            _configuration = configuration ?? new BrasilApiConfiguration();
         }
 
         private V2.Interfaces.Services.ICepService _cepService;
@@ -129,7 +124,7 @@ namespace BrasilApi.Client
             get
             {
                 if (_cepService == null)
-                    _cepService = new V2.Services.CepService(_configuration);
+                    _cepService = new V2.Services.CepService(this.Configuration);
 
                 return _cepService;
             }
