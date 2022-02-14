@@ -8,7 +8,7 @@
 
 **Adicionar o pacote via NuGet:**
 ```
-dotnet add package BrasilApi.Client --version 1.0.1
+dotnet add package BrasilApi.Client --version 1.0.2
 ```
 
 **Exemplo de uso:**
