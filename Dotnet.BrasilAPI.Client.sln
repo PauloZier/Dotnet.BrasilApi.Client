@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A71EC4D-8383-4C66-9D47-A169660B5F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilApi.Client", "src\BrasilApi.Client\BrasilApi.Client.csproj", "{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{DBB6E368-E722-4C19-AC12-916FED70D640}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasilApi.Client.Test", "test\BrasilApi.Client.Test\BrasilApi.Client.Test.csproj", "{AA60EDD3-74FD-4BA9-AA6C-C22599948C62}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA60EDD3-74FD-4BA9-AA6C-C22599948C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA60EDD3-74FD-4BA9-AA6C-C22599948C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA60EDD3-74FD-4BA9-AA6C-C22599948C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA60EDD3-74FD-4BA9-AA6C-C22599948C62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9568FE0B-BB42-4B29-9B42-2AD7AF1CAAE3} = {1A71EC4D-8383-4C66-9D47-A169660B5F36}
+		{AA60EDD3-74FD-4BA9-AA6C-C22599948C62} = {DBB6E368-E722-4C19-AC12-916FED70D640}
+	EndGlobalSection
+EndGlobal
