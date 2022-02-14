@@ -2,7 +2,7 @@
 
 <hr />
 
-<p align="center">Cliente para a [BrasilApi](https://brasilapi.com.br)</p>
+<p align="center">Cliente para a <a href="https://brasilapi.com.br">BrasilApi</a></p>
 
 <hr />
 
@@ -18,4 +18,4 @@ IBrasilApiClient brasilApi = new BrasilApiClient();
 IEnumerable<Bank> banks = await brasilApi.V1.Banks.GetAsync();
 ```
 
-<p>Para mais exemplos basta visualizar o [projeto de testes](https://github.com/PauloZier/Dotnet.BrasilApi.Client/tree/main/test/BrasilApi.Client.Test) deste repositório </p>
+<p>Para mais exemplos basta visualizar o <a href="https://github.com/PauloZier/Dotnet.BrasilApi.Client/tree/main/test/BrasilApi.Client.Test">projeto de testes</a> deste repositório </p>
