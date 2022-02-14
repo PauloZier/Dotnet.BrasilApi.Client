@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Dotnet.BrasilApi.Client</PackageId>
+    <PackageId>BrasilApi.Client</PackageId>
     <Authors>Paulo Zier</Authors>
     <Owners>PauloZier</Owners>
+    <PackageLicenseFile>MIT-LICENSE.txt</PackageLicenseFile>
     <Title>BrasilApi Client</Title>
     <Description>Pacote para consumir serviços da BrasilApi.</Description>
     <PackageVersion>1.0.0</PackageVersion>
@@ -16,6 +17,10 @@
   <ItemGroup>
     <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageReference Include="System.Text.Json" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MIT-LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
 
 </Project>
