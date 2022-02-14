@@ -19,34 +19,14 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<IEnumerable<Bank>> GetAsync()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync(this.Uri);
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Bank[]>();
-            }
+            return await this.ExecuteAsync<IEnumerable<Bank>>(
+                async (client) => await client.GetAsync(this.Uri));
         }
 
         public async Task<Bank> GetAsync(string code)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-                
-                var response = await client.GetAsync($"{this.Uri}/{code}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Bank>();
-            }
+            return await this.ExecuteAsync<Bank>(async (client) =>
+                await client.GetAsync($"{this.Uri}/{code}"));
         }
     }
 }

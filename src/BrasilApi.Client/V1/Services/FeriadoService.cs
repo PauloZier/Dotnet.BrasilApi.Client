@@ -19,18 +19,8 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<IEnumerable<Feriado>> GetAsync(string ano)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.Uri}/{ano}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Feriado[]>();
-            }
+            return await this.ExecuteAsync<IEnumerable<Feriado>>(async (client) 
+                => await client.GetAsync($"{this.Uri}/{ano}"));
         }
     }
 }

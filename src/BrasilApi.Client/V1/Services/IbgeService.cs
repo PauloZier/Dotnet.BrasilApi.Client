@@ -20,51 +20,21 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<IEnumerable<Municipio>> GetMunicipalitiesAsync(string siglaUF)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.MunicipalitiesUri}/{siglaUF}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Municipio[]>();
-            }
+            return await this.ExecuteAsync<IEnumerable<Municipio>>(async (client) 
+                => await client.GetAsync($"{this.MunicipalitiesUri}/{siglaUF}"));
         }
 
         public async Task<IEnumerable<Estado>> GetStatesAsync()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.StatesUri}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Estado[]>();
-            }
+            return await this.ExecuteAsync<IEnumerable<Estado>>(async (client) 
+                => await client.GetAsync($"{this.StatesUri}"));
         }
 
         
         public async Task<Estado> GetStateAsync(string code)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.StatesUri}/{code}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Estado>();
-            }
+            return await this.ExecuteAsync<Estado>(async (client) 
+                => await client.GetAsync($"{this.StatesUri}/{code}"));
         }
     }
 }

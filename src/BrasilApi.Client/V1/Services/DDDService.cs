@@ -18,18 +18,8 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<DDD> GetAsync(string ddd)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.Uri}/{ddd}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<DDD>();
-            }
+            return await this.ExecuteAsync<DDD>(async (client) 
+                => await client.GetAsync($"{this.Uri}/{ddd}"));
         }
     }
 }

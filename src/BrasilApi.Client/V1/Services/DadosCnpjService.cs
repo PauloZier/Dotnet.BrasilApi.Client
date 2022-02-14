@@ -18,18 +18,8 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<DadosCnpj> GetAsync(string cnpj)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.Uri}/{cnpj}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<DadosCnpj>();
-            }
+            return await this.ExecuteAsync<DadosCnpj>(async (client) 
+                => await client.GetAsync($"{this.Uri}/{cnpj}"));
         }
     }
 }

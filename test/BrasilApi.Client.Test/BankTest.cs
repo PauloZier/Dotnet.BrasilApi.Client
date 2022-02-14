@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BrasilApi.Client.V1.Interfaces.Services;
 using BrasilApi.Client.V1.Models;
@@ -33,6 +34,23 @@ public class BankTest
         Bank bank = service.GetAsync("1").Result;
 
         Assert.IsNotNull(bank);
+
+        Assert.Pass();
+    }
+
+    [Test]
+    public void Test3()
+    {
+        try
+        {
+            IBankService service = new BankService(new BrasilApiConfiguration());
+
+            Bank bank = service.GetAsync("31231512").Result;
+        }
+        catch (BrasilApiClientException)
+        {
+            Assert.Pass();
+        }
 
         Assert.Pass();
     }

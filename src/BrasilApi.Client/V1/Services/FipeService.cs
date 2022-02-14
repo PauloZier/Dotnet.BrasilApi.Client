@@ -21,11 +21,8 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<IEnumerable<Marca>> GetBrandsAsync(TipoVeiculo? tipoVeiculo = null, long? tabelaReferencia = null)
         {
-            using (var client = new HttpClient())
+            return await this.ExecuteAsync<IEnumerable<Marca>>(async (client) =>
             {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
                 var uri = tipoVeiculo != null 
                     ? $"{this.BrandsUri}/{tipoVeiculo.ToString().ToLower()}" 
                     : this.BrandsUri;
@@ -33,50 +30,27 @@ namespace BrasilApi.Client.V1.Services
                 if (tabelaReferencia != null)
                     uri = $"{uri}?tabela_referencia={tabelaReferencia}";
 
-                var response = await client.GetAsync(uri);
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Marca[]>();
-            }
+                return await client.GetAsync(uri);
+            });
         }
 
         public async Task<IEnumerable<Preco>> GetPricesAsync(string codigoFipe, long? tabelaReferencia = null)
         {
-            using (var client = new HttpClient())
+            return await this.ExecuteAsync<IEnumerable<Preco>>(async (client) =>
             {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
                 var uri = $"{this.PricesUri}/{codigoFipe}";
                 
                 if (tabelaReferencia != null)
                     uri = $"{uri}?tabela_referencia={tabelaReferencia}";
 
-                var response = await client.GetAsync(uri);
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Preco[]>();
-            }
+                return await client.GetAsync(uri);
+            });
         }
 
         public async Task<IEnumerable<Tabela>> GetTablesAsync()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(this.Configuration.Endpoint);
-                client.Timeout = this.Configuration.TimeOut;
-
-                var response = await client.GetAsync($"{this.TablesUri}");
-                
-                if (!response.IsSuccessStatusCode)
-                    response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadFromJsonAsync<Tabela[]>();
-            }
+            return await this.ExecuteAsync<IEnumerable<Tabela>>(async (client) 
+                => await client.GetAsync($"{this.TablesUri}"));
         }
     }
 }
