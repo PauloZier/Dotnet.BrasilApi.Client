@@ -18,23 +18,13 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<IEnumerable<Municipio>> GetMunicipalitiesAsync(string siglaUF)
-        {
-            return await this.ExecuteAsync<IEnumerable<Municipio>>(async (client) 
-                => await client.GetAsync($"{this.MunicipalitiesUri}/{siglaUF}"));
-        }
+        public async Task<IEnumerable<Municipio>> GetMunicipalitiesAsync(string siglaUF) =>
+            await base.GetAsync<IEnumerable<Municipio>>($"{this.MunicipalitiesUri}/{siglaUF}");
 
-        public async Task<IEnumerable<Estado>> GetStatesAsync()
-        {
-            return await this.ExecuteAsync<IEnumerable<Estado>>(async (client) 
-                => await client.GetAsync($"{this.StatesUri}"));
-        }
+        public async Task<IEnumerable<Estado>> GetStatesAsync() =>   
+            await base.GetAsync<IEnumerable<Estado>>($"{this.StatesUri}");
 
-        
-        public async Task<Estado> GetStateAsync(string code)
-        {
-            return await this.ExecuteAsync<Estado>(async (client) 
-                => await client.GetAsync($"{this.StatesUri}/{code}"));
-        }
+        public async Task<Estado> GetStateAsync(string code) =>
+            await base.GetAsync<Estado>($"{this.StatesUri}/{code}");
     }
 }

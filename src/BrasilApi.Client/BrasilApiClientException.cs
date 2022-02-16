@@ -10,8 +10,8 @@ namespace BrasilApi.Client
         public HttpStatusCode StatusCode => ResponseMessage.StatusCode;
         public string Content => ResponseMessage.Content.ReadAsStringAsync().Result;
 
-        public BrasilApiClientException(HttpResponseMessage responseMessage, string message, Exception inner)
-            : base(message, inner)
+        public BrasilApiClientException(HttpResponseMessage responseMessage, string message)
+            : base(message)
         {   
             this.ResponseMessage = responseMessage;
         }

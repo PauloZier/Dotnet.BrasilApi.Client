@@ -47,6 +47,10 @@ public class BankTest
 
             Bank bank = service.GetAsync("31231512").Result;
         }
+        catch(BrasilApiClientException ex)
+        {
+            Assert.IsInstanceOf<BrasilApiClientException>(ex);
+        }
         catch (Exception ex)
         {
             Assert.IsInstanceOf<BrasilApiClientException>(ex.InnerException);

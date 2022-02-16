@@ -21,36 +21,27 @@ namespace BrasilApi.Client.V1.Services
 
         public async Task<IEnumerable<Marca>> GetBrandsAsync(TipoVeiculo? tipoVeiculo = null, long? tabelaReferencia = null)
         {
-            return await this.ExecuteAsync<IEnumerable<Marca>>(async (client) =>
-            {
-                var uri = tipoVeiculo != null 
-                    ? $"{this.BrandsUri}/{tipoVeiculo.ToString().ToLower()}" 
-                    : this.BrandsUri;
+            var uri = tipoVeiculo != null 
+                ? $"{this.BrandsUri}/{tipoVeiculo.ToString().ToLower()}" 
+                : this.BrandsUri;
 
-                if (tabelaReferencia != null)
-                    uri = $"{uri}?tabela_referencia={tabelaReferencia}";
+            if (tabelaReferencia != null)
+                uri = $"{uri}?tabela_referencia={tabelaReferencia}";
 
-                return await client.GetAsync(uri);
-            });
+            return await base.GetAsync<IEnumerable<Marca>>(uri);            
         }
 
         public async Task<IEnumerable<Preco>> GetPricesAsync(string codigoFipe, long? tabelaReferencia = null)
         {
-            return await this.ExecuteAsync<IEnumerable<Preco>>(async (client) =>
-            {
-                var uri = $"{this.PricesUri}/{codigoFipe}";
-                
-                if (tabelaReferencia != null)
-                    uri = $"{uri}?tabela_referencia={tabelaReferencia}";
+            var uri = $"{this.PricesUri}/{codigoFipe}";
+            
+            if (tabelaReferencia != null)
+                uri = $"{uri}?tabela_referencia={tabelaReferencia}";
 
-                return await client.GetAsync(uri);
-            });
+            return await base.GetAsync<IEnumerable<Preco>>(uri);
         }
 
-        public async Task<IEnumerable<Tabela>> GetTablesAsync()
-        {
-            return await this.ExecuteAsync<IEnumerable<Tabela>>(async (client) 
-                => await client.GetAsync($"{this.TablesUri}"));
-        }
+        public async Task<IEnumerable<Tabela>> GetTablesAsync() => 
+            await base.GetAsync<IEnumerable<Tabela>>($"{this.TablesUri}");
     }
 }

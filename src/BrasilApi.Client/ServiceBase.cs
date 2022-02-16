@@ -23,26 +23,19 @@ namespace BrasilApi.Client
             };
         }
 
-        protected async Task<T> ExecuteAsync<T>(Func<HttpClient, Task<HttpResponseMessage>> func)
+        protected void EnsureSuccessStatusCode(HttpResponseMessage response)
         {
-            HttpResponseMessage responseMessage = null;
+            if (!response.IsSuccessStatusCode)
+                throw new BrasilApiClientException(response, "Ocorreu um erro ao tentar consultar a BrasilAPI!");
+        }
 
-            try
+        protected async Task<T> GetAsync<T>(string uri)
+        {
+            using (var client = this.CreateHttpClient())
             {
-                using (var client = this.CreateHttpClient())
-                {
-                    responseMessage = await func(client);
-                    responseMessage.EnsureSuccessStatusCode();
-                    return await responseMessage.Content.ReadFromJsonAsync<T>();
-                }
-            }
-            catch (HttpRequestException ex)
-            {
-                throw new BrasilApiClientException(responseMessage, ex.Message, ex);
-            }
-            catch
-            {
-                throw;
+                var response = await client.GetAsync(uri);
+                this.EnsureSuccessStatusCode(response);
+                return await response.Content.ReadFromJsonAsync<T>();
             }
         }
     }

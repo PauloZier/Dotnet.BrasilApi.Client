@@ -16,10 +16,7 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<DadosCnpj> GetAsync(string cnpj)
-        {
-            return await this.ExecuteAsync<DadosCnpj>(async (client) 
-                => await client.GetAsync($"{this.Uri}/{cnpj}"));
-        }
+        public async Task<DadosCnpj> GetAsync(string cnpj) =>
+            await base.GetAsync<DadosCnpj>($"{this.Uri}/{cnpj}");
     }
 }

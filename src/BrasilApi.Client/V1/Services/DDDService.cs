@@ -16,10 +16,8 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<DDD> GetAsync(string ddd)
-        {
-            return await this.ExecuteAsync<DDD>(async (client) 
-                => await client.GetAsync($"{this.Uri}/{ddd}"));
-        }
+        public async Task<DDD> GetAsync(string ddd) =>
+            await base.GetAsync<DDD>($"{this.Uri}/{ddd}");
+        
     }
 }

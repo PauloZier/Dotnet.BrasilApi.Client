@@ -17,10 +17,7 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<IEnumerable<Feriado>> GetAsync(string ano)
-        {
-            return await this.ExecuteAsync<IEnumerable<Feriado>>(async (client) 
-                => await client.GetAsync($"{this.Uri}/{ano}"));
-        }
+        public async Task<IEnumerable<Feriado>> GetAsync(string ano) =>
+            await base.GetAsync<IEnumerable<Feriado>>($"{this.Uri}/{ano}");
     }
 }

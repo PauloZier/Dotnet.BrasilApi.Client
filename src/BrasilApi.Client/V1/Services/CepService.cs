@@ -16,10 +16,7 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<CEP> GetAsync(string cep)
-        {
-            return await this.ExecuteAsync<CEP>(async (client) 
-                => await client.GetAsync($"{this.Uri}/{cep}"));
-        }
+        public async Task<CEP> GetAsync(string cep) =>
+            await base.GetAsync<CEP>($"{this.Uri}/{cep}");
     }
 }

@@ -17,16 +17,10 @@ namespace BrasilApi.Client.V1.Services
         {
         }
 
-        public async Task<IEnumerable<Bank>> GetAsync()
-        {
-            return await this.ExecuteAsync<IEnumerable<Bank>>(
-                async (client) => await client.GetAsync(this.Uri));
-        }
+        public async Task<IEnumerable<Bank>> GetAsync() => 
+            await base.GetAsync<IEnumerable<Bank>>(this.Uri);
 
-        public async Task<Bank> GetAsync(string code)
-        {
-            return await this.ExecuteAsync<Bank>(async (client) =>
-                await client.GetAsync($"{this.Uri}/{code}"));
-        }
+        public async Task<Bank> GetAsync(string code) =>
+            await base.GetAsync<Bank>($"{this.Uri}/{code}");
     }
 }
