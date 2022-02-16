@@ -8,8 +8,8 @@
     <PackageLicenseFile>MIT-LICENSE.txt</PackageLicenseFile>
     <Title>BrasilApi Client</Title>
     <Description>Pacote para consumir serviços da BrasilApi.</Description>
-    <PackageVersion>1.0.2</PackageVersion>
-    <Version>1.0.2</Version>
+    <PackageVersion>1.0.3</PackageVersion>
+    <Version>1.0.3</Version>
     <RepositoryUrl>https://github.com/PauloZier/Dotnet.BrasilApi.Client</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
